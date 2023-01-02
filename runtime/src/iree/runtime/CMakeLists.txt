@@ -11,6 +11,41 @@
 iree_add_all_subdirs()
 
 iree_cc_library(
+    NAME
+      runtime_shared
+    HDRS
+      "call.h"
+      "instance.h"
+      "session.h"
+    SRCS
+      "call.c"
+      "instance.c"
+      "session.c"
+    DEPS
+      iree::base
+      iree::base::core_headers
+      iree::base::internal
+      iree::base::internal::file_io
+      iree::base::tracing
+      iree::hal
+      iree::hal::drivers
+      iree::modules::hal
+      iree::vm
+      iree::vm::bytecode_module
+    LINKOPTS
+      # Export all functions
+      # -Wl,--no-undefined
+      -Wl,-E
+      -Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/api_exports.ld
+    PUBLIC
+    SHARED
+    PROPERTIES
+      OUTPUT_NAME "iree_runtime"
+      VERSION "0"
+      SOVERSION "0"
+)
+
+iree_cc_library(
   NAME
     runtime
   HDRS

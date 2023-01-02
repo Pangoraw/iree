@@ -20,7 +20,7 @@
 #if defined(__cplusplus)
 #define IREE_API_EXPORT extern "C"
 #else
-#define IREE_API_EXPORT
+#define IREE_API_EXPORT __attribute__ ((visibility("default")))
 #endif  // __cplusplus
 
 #if defined(__cplusplus)

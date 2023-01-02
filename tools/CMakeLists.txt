@@ -262,6 +262,54 @@ if(IREE_BUILD_COMPILER)
     HOSTONLY
   )
 
+  iree_cc_binary(
+    NAME
+      generate-model
+    SRCS
+      "generate-model.c"
+    DEPS
+      iree::compiler::API2::Headers
+      iree::compiler::API2::Impl
+      iree::runtime
+      iree::base
+      # LLVMSupport
+      # MLIRHLOCAPIDialects
+      # MLIRHLOGPUTransforms
+      # MLIRHLOAnalysis
+      # MLIRCAPIIR
+      # MLIRCAPIDebug
+      # MLIRCAPIInterfaces
+      # MLIRCAPIPDL
+      # MLIRCAPILinalg
+      # MLIRCAPIFunc
+      # MLIRCAPITransformDialect
+      # MLIRCAPIRegisterEverything
+      # MLIRParser
+      # MLIRPass
+      # MLIRSupport
+      # MLIRTargetLLVMIRExport
+      # iree::base::internal::flags
+      # iree::base::tracing
+      # iree::compiler::ConstEval
+      # iree::compiler::Dialect::HAL::Target
+      # iree::compiler::Dialect::VM::Target::Bytecode
+      # iree::compiler::Dialect::VM::Target::init_targets
+      # iree::compiler::Pipelines
+      # iree::compiler::Tools::init_passes_and_dialects
+      # iree::compiler::Tools::init_targets
+      # iree::hal
+      # iree::modules::hal::types
+      # iree::tooling::context_util
+      # iree::tooling::device_util
+      # iree::tooling::vm_util_cc
+      # iree::vm
+      # iree::vm::bytecode_module
+    DATA
+      ${IREE_LLD_TARGET}
+    HOSTONLY
+  )
+
+
   # Ensure FileCheck and associated binaries get built. Tests don't have
   # dependencies in CMake because they aren't targets. So until we fix that, we
   # just force this to get built.
